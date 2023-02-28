@@ -6,6 +6,4 @@ public interface Cliente {
     String nome = null;
     String CPF = null;
     Telefone telefone = null;
-
-
 }
