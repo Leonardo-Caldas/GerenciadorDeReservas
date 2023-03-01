@@ -20,4 +20,9 @@ O GerenciadorRestaurante uma aplicação java baseada no framework swing. Seu ob
   * Após iniciar a aplicação Spring, acesse o endereço [Cadastro de Clientes](http://localhost:8080/cliente).
   ⋅⋅⋅ Obs.: Em desenvolvimento...
 
+* Banco de Dados H2:
+  * usuario: sa
+  * senha: password
+  * [GUI H2](http://localhost:8080/h2-console)
+
    
