@@ -13,3 +13,11 @@ O GerenciadorRestaurante uma aplicação java baseada no framework swing. Seu ob
 * Administrador:
   * Tela de vizualização das reservas;
   * Tela de edição da fila;
+
+### Iniciando aplicação:
+
+* Cliente:
+  * Após iniciar a aplicação Spring, acesse o endereço [Cadastro de Clientes](http://localhost:8080/cliente).
+  ⋅⋅⋅ Obs.: Em desenvolvimento...
+
+   
