@@ -1,4 +1,2 @@
-package com.gerenciador.dto.reserva;
-
-public interface Reserva {
+package com.gerenciador.dto.reserva;public class Reserva {
 }
