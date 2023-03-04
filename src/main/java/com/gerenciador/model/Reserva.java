@@ -1,9 +1,7 @@
-package com.gerenciador.dto.reserva;
+package com.gerenciador.model;
 
-import lombok.Data;
 import java.time.LocalDateTime;
 
-@Data
 public class Reserva {
     private Integer numeroDeAcompanhantes = null;
     private LocalDateTime dataDaReserva = null;

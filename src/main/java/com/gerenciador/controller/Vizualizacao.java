@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class Vizualizacao {
-    @GetMapping("/cliente/vizualiza")
-    public String excluiCliente(@RequestParam(defaultValue = "null") String nome) {
-        return "cliente.html";
+    @GetMapping("/home")
+    public String mostraHomePage(@RequestParam(defaultValue = "null") String nome) {
+        return "home.html";
     }
 }

@@ -12,6 +12,27 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
+        nav {
+            border-bottom: 1px solid black;
+        }
+
+        .barraHeaders ol {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .barraHeader {
+            display: inline-block;
+        }
+
+        .barraHeader a::after {
+            display: inline-block;
+            color: #000;
+            content: '>';
+            font-size: 80%;
+            font-weight: bold;
+            padding: 0 3px;
+        }
         body {
             color: #566787;
             background: #f5f5f5;
@@ -264,6 +285,14 @@
     </script>
 </head>
 <body>
+<header>
+    <nav class="barraHeaders">
+        <ol>
+            <li class="barraHeader"><button action="#" th:action="@{/home}">Home</button></li>
+            <li class="barraHeader">Cliente</li>
+        </ol>
+    </nav>
+</header>
 <div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
