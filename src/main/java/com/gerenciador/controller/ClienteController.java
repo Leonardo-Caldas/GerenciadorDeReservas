@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ClienteController {
@@ -21,7 +21,7 @@ public class ClienteController {
     }
 
     @PostMapping("/cliente/incluir")
-    public String incluirCliente(Model model){
+    public String incluirCliente(@ModelAttribute Cliente cliente, Model model){
 
         System.out.println(cliente.toString());
 
