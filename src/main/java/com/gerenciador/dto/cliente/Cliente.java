@@ -1,7 +1,11 @@
 package com.gerenciador.dto.cliente;
 
-public interface Cliente {
+import lombok.Data;
+
+@Data
+public class Cliente {
     String nome = null;
     String CPF = null;
     String telefone = null;
+    Double numeroDeAcompanhantes = null;
 }
