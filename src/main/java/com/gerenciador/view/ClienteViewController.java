@@ -75,7 +75,7 @@ public class ClienteViewController {
 
     @PostMapping("/cliente-gravar/{id}")
     public String atualizarCliente(@PathVariable("id") Integer id, Cliente cliente,
-                               BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+                                   BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 
         try{
             /*

@@ -2,9 +2,94 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gerenciador de Reservas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Restaurante</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+        nav {
+            min-inline-size: 600px;
+            position: fixed;
+            width: 100%;
+            height: 5%;
+            color: #fff;
+            background: #435d7d;
+        }
+        .barraHeaderCliente {
+            display: inline-block;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+        }
+        .barraHeaderAdmin {
+            display: inline-block;
+            position: fixed;
+            top: 15px;
+            right: 150px;
+        }
+        .barraHeader a::after {
+            display: inline-block;
+            color: #000;
+            content: '>';
+            font-size: 80%;
+            font-weight: bold;
+            padding: 0 3px;
+        }
+        body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+        .headerDivider {
+            border-left:4px solid black;
+            height: 100%;
+            position:absolute;
+            right:350px;
+            top:0px;
+        }
+        .buttonHeaderCliente {
+            display: inline-block;
+            position: fixed;
+            top: 15px;
+            left: 120px;
+        }
+        .buttonHeaderAdmin {
+            display: inline-block;
+            position: fixed;
+            top: 15px;
+            right: 50px;
+        }
+        .h1 {
+            top: 150px;
+            left: 30px;
+            position: fixed;
+        }
+
+    </style>
 </head>
 <body>
-<h2><a href="/cliente">Ver Clientes</a></h2>
+<header>
+    <nav class="barraHeaders">
+        <ul>
+            <a class="barraHeaderCliente">Área do Cliente</a>
+            <a class="buttonHeaderCliente" href="/cliente">Faça sua Reserva</a>
+        </ul>
+        <div class="headerDivider"></div>
+        <ul>
+            <a class="barraHeaderAdmin">Área do Administrador</a>
+            <a class="buttonHeaderAdmin" href="/reserva">Reservas</a>
+        </ul>
+
+    </nav>
+</header>
+<h1 class="h1">Administrador de Reservas de Restaurante</h1>
+<h2></h2>
+
 </body>
 </html>
