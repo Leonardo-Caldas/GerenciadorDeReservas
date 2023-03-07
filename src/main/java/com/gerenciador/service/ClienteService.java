@@ -24,6 +24,10 @@ public class ClienteService {
         return lista;
     }
 
+    public Cliente pesquisar(Integer id) {
+        return clienteRepository.findById(id).orElse(null);
+    }
+
     public Cliente atualizar(Cliente cliente){
         return clienteRepository.save(cliente);
     }
