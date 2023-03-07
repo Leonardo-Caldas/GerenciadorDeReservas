@@ -29,7 +29,7 @@ public class ClienteService {
     }
 
     public Cliente excluir(int id){
-        Cliente cliente = clienteRepository.findById(id).orElseThrow();
+        Cliente cliente = clienteRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         clienteRepository.deleteById(id);
         return cliente;
     }
