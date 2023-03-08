@@ -18,10 +18,6 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    public Cliente obter(Integer id){
-        return clienteRepository.findById(id).orElse(null);
-    }
-
     public List<Cliente> listar(){
         List<Cliente> lista = new ArrayList<>();
         clienteRepository.findAll().forEach(lista::add);
