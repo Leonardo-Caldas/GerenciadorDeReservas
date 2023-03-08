@@ -33,22 +33,22 @@ public class ClienteViewController {
     public String showNovoComodo(Cliente cliente) {
         return "comodo-create";
     }
-
-    @GetMapping("/comodo-edit/{id}")
-    public String showEditComodo(@PathVariable("id") String id, Model model) {
-        Cliente comodo = clienteService.obter(id);
-        model.addAttribute("comodo", comodo);
-        return "comodo-update";
-    }
-
-    @GetMapping("/comodo-delete/{id}")
-    public String showDeleteComodo(@PathVariable("id") String id, Model model) {
-        Comodo comodo = clienteService.obter(id);
-        model.addAttribute("comodo", comodo);
-        return "comodo-excluir";
-    }
     */
+    @GetMapping("/cliente-editar/{id}")
+    public String clienteEditar(@PathVariable("id") Integer id, Model model) {
+        Cliente cliente = clienteService.pesquisar(id);
+        model.addAttribute("cliente", cliente);
+        return "cliente-editar";
+    }
+
     @GetMapping("/cliente-excluir/{id}")
+    public String clienteExcluir(@PathVariable("id") Integer id, Model model) {
+        Cliente cliente = clienteService.pesquisar(id);
+        model.addAttribute("cliente", cliente);
+        return "cliente-excluir";
+    }
+
+    @PostMapping("/excluir/{id}")
     public String excluirCliente(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         try {
             clienteController.excluir(id);
