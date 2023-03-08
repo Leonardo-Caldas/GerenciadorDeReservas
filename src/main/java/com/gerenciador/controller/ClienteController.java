@@ -19,10 +19,7 @@ public class ClienteController {
     @PostMapping
     public Integer cadastrar(@RequestBody ClienteRequest request) {
         Cliente cliente = new Cliente();
-        cliente.setNome(request.getNome());
-        cliente.setTelefone(request.getTelefone());
-        cliente.setEmail(request.getEmail());
-        cliente = clienteService.cadastrar(cliente);
+        BeanUtils.copyProperties(request, cliente);
         return cliente.getId();
     }
 

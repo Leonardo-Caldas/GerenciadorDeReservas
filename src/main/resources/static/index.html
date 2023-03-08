@@ -50,6 +50,9 @@
         }
 
         /* Float the link section to the right */
+        .header-left{
+            float: left;
+        }
         .header-right {
             float: right;
         }
@@ -76,11 +79,12 @@
 <body>
 <header>
     <div class="header">
-        <a href="index.html" class="logo">Restaurante</a>
+        <div class="header-left">
+            <a href="index.html" class="active">Home</a>
+            <a href="/reserva-cliente">Faça sua Reserva</a>
+        </div>
         <div class="header-right">
-            <a class="active">Home</a>
-            <a href="/cliente">Área do Cliente</a>
-            <a href="/reserva">Faça sua Reserva</a>
+            <a href="/admin-index.html">Área Restrita</a>
         </div>
     </div>
 </header>
