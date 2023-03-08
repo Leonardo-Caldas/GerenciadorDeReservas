@@ -12,33 +12,58 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
-        nav {
-            min-inline-size: 600px;
-            position: fixed;
-            width: 100%;
-            height: 5%;
-            color: #fff;
-            background: #435d7d;
+        /* Style the header with a grey background and some padding */
+        .header {
+            overflow: hidden;
+            background-color: #f1f1f1;
+            padding: 20px 10px;
         }
-        .barraHeaderCliente {
-            display: inline-block;
-            position: fixed;
-            top: 15px;
-            left: 15px;
+
+        /* Style the header links */
+        .header a {
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
         }
-        .barraHeaderAdmin {
-            display: inline-block;
-            position: fixed;
-            top: 15px;
-            right: 150px;
-        }
-        .barraHeader a::after {
-            display: inline-block;
-            color: #000;
-            content: '>';
-            font-size: 80%;
+
+        /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+        .header a.logo {
+            font-size: 25px;
             font-weight: bold;
-            padding: 0 3px;
+        }
+
+        /* Change the background color on mouse-over */
+        .header a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Style the active/current link*/
+        .header a.active {
+            background-color: dodgerblue;
+            color: white;
+        }
+
+        /* Float the link section to the right */
+        .header-right {
+            float: right;
+        }
+
+        /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+        @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+            .header-right {
+                float: none;
+            }
         }
         body {
             color: #566787;
@@ -46,47 +71,18 @@
             font-family: 'Varela Round', sans-serif;
             font-size: 13px;
         }
-        .headerDivider {
-            border-left:4px solid black;
-            height: 100%;
-            position:absolute;
-            right:350px;
-            top:0px;
-        }
-        .buttonHeaderCliente {
-            display: inline-block;
-            position: fixed;
-            top: 15px;
-            left: 120px;
-        }
-        .buttonHeaderAdmin {
-            display: inline-block;
-            position: fixed;
-            top: 15px;
-            right: 50px;
-        }
-        .h1 {
-            top: 150px;
-            left: 30px;
-            position: fixed;
-        }
-
     </style>
 </head>
 <body>
 <header>
-    <nav class="barraHeaders">
-        <ul>
-            <a class="barraHeaderCliente">Área do Cliente</a>
-            <a class="buttonHeaderCliente" href="/cliente">Faça sua Reserva</a>
-        </ul>
-        <div class="headerDivider"></div>
-        <ul>
-            <a class="barraHeaderAdmin">Área do Administrador</a>
-            <a class="buttonHeaderAdmin" href="/reserva">Reservas</a>
-        </ul>
-
-    </nav>
+    <div class="header">
+        <a href="index.html" class="logo">Restaurante</a>
+        <div class="header-right">
+            <a class="active">Home</a>
+            <a href="/cliente">Área do Cliente</a>
+            <a href="/reserva">Faça sua Reserva</a>
+        </div>
+    </div>
 </header>
 <h1 class="h1">Administrador de Reservas de Restaurante</h1>
 <h2></h2>
