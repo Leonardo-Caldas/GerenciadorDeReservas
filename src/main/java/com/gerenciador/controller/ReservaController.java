@@ -23,12 +23,11 @@ public class ReservaController {
     private final ClienteService clienteService;
 
     @PostMapping
-    public Integer cadastrarReserva(@PathVariable Integer idCliente ,@RequestBody ReservaRequest reservaRequest){
-        Cliente cliente = clienteService.pesquisar(idCliente);
+    public Integer cadastrarReserva(@RequestBody ReservaRequest reservaRequest){
         Reserva reserva = new Reserva();
         reserva.setNumeroDeAcompanhantes(reservaRequest.getNumeroDeAcompanhantes());
         reserva.setDataMarcada(reservaRequest.getDataMarcada());
-        reserva.setIdCliente(cliente.getId());
+        reserva.setIdCliente(reservaRequest.getIdCliente());
         return reserva.getId();
     }
     @GetMapping

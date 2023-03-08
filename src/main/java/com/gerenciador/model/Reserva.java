@@ -16,11 +16,9 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private Integer numeroDeAcompanhantes;
-
     private String dataMarcada;
-
+    private String horaMarcada;
     private Integer idCliente;
 
 
