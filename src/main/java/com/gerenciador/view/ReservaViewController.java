@@ -48,7 +48,6 @@ public class ReservaViewController {
     public String criarReserva(@PathVariable("idCliente") Integer idCliente, Model model, ReservaResponse reservaResponse) {
         model.addAttribute("cliente", idCliente);
         model.addAttribute("reserva", reservaResponse);
-        System.out.println("Agora vai");
         return "reserva-criar";
     }
 
@@ -56,7 +55,6 @@ public class ReservaViewController {
     public String adicionarReserva(@PathVariable ("id") Integer idCliente, ReservaRequest reserva, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         try{
             reserva.setIdCliente(idCliente);
-            System.out.println(reserva.toString());
             reservaController.cadastrarReserva(reserva);
             redirectAttributes.addFlashAttribute("mensagem", String.format("Reserva marcada para o dia %s com sucesso!", reserva.getDataMarcada()));
         } catch (Exception e){
