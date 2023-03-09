@@ -2,9 +2,10 @@ package com.gerenciador.view;
 
 import com.gerenciador.controller.ClienteController;
 import com.gerenciador.dto.cliente.ClienteRequest;
+import com.gerenciador.dto.cliente.ClienteResponse;
 import com.gerenciador.model.Cliente;
-import com.gerenciador.service.ClienteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,13 +19,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequiredArgsConstructor
 public class ClienteViewController {
-
-    private final ClienteService clienteService;
     private final ClienteController clienteController;
 
     @RequestMapping(value = {"/cliente"})
     public String index(Model model) {
-        model.addAttribute("clientes", clienteService.listar());
+        model.addAttribute("clientes", clienteController.listar());
         return "cliente";
     }
 
@@ -36,14 +35,14 @@ public class ClienteViewController {
     */
     @GetMapping("/cliente-editar/{id}")
     public String clienteEditar(@PathVariable("id") Integer id, Model model) {
-        Cliente cliente = clienteService.pesquisar(id);
+        ClienteResponse cliente =clienteController.pesquisar(id);
         model.addAttribute("cliente", cliente);
         return "cliente-editar";
     }
 
     @GetMapping("/cliente-excluir/{id}")
     public String clienteExcluir(@PathVariable("id") Integer id, Model model) {
-        Cliente cliente = clienteService.pesquisar(id);
+        ClienteResponse cliente = clienteController.pesquisar(id);
         model.addAttribute("cliente", cliente);
         return "cliente-excluir";
     }
@@ -61,10 +60,10 @@ public class ClienteViewController {
     }
 
     @PostMapping("/cliente-add")
-    public String addCliente(Cliente cliente, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    public String addCliente(ClienteRequest cliente, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 
         try{
-            clienteService.cadastrar(cliente);
+            clienteController.cadastrar(cliente);
             redirectAttributes.addFlashAttribute("mensagem", String.format("Cliente %s cadastrado com sucesso!", cliente.getNome()));
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("mensagem", e.getMessage());
@@ -86,9 +85,13 @@ public class ClienteViewController {
 
          */
             ClienteRequest clienteRequest = new ClienteRequest();
+            /*
             clienteRequest.setNome(cliente.getNome());
             clienteRequest.setTelefone(cliente.getTelefone());
             clienteRequest.setEmail(cliente.getEmail());
+
+             */
+            BeanUtils.copyProperties(cliente, clienteRequest);
 
             clienteController.atualizar(cliente.getId(), clienteRequest);
 

@@ -20,6 +20,7 @@ public class ClienteController {
     public Integer cadastrar(@RequestBody ClienteRequest request) {
         Cliente cliente = new Cliente();
         BeanUtils.copyProperties(request, cliente);
+        clienteService.cadastrar(cliente);
         return cliente.getId();
     }
 
@@ -36,9 +37,7 @@ public class ClienteController {
     public ClienteResponse pesquisar(@PathVariable Integer id) {
         Cliente cliente = clienteService.pesquisar(id);
         ClienteResponse response = new ClienteResponse();
-        response.setNome(cliente.getNome());
-        response.setTelefone(cliente.getTelefone());
-        response.setEmail(cliente.getEmail());
+        BeanUtils.copyProperties(cliente, response);
         return response;
     }
 
