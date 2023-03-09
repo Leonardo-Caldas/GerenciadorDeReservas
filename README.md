@@ -1,6 +1,12 @@
 # GerenciadorDeReservas
 
-O GerenciadorRestaurante uma aplicação java baseada no framework Springboot. Seu objetivo fornecer é uma ferramenta capaz de realizar a gestão de reservas de um restaurante.
+<p>O GerenciadorDeReservas é uma aplicação Java baseada no framework Spring Boot.</p>
+<p>Seu objetivo é ser uma ferramenta capaz de realizar a gestão de reservas de um restaurante, incluindo o cadastro, exclusão, atualização e listagem de clientes e reservas.<p>
+ 
+### Requisitos:
+ * Java v11+
+ * Spring Boot v2.7.9
+ * Banco de Dados H2 v2.1.214
 
 ### Principais funcionalidades:
 
@@ -16,13 +22,12 @@ O GerenciadorRestaurante uma aplicação java baseada no framework Springboot. S
 
 ### Iniciando aplicação:
 
-* Cliente:
-  * Após iniciar a aplicação Spring, acesse o endereço [Cadastro de Clientes](http://localhost:8080/cliente).
-  ⋅⋅⋅ Obs.: Em desenvolvimento...
-
+* Interface Web:
+  * Após iniciar a aplicação Spring, acesse o endereço [Principal](http://localhost:8080/).
+  
 * Banco de Dados H2:
   * usuario: sa
   * senha: password
   * [GUI H2](http://localhost:8080/h2-console)
 
-   
+### Layout Interface Web:
