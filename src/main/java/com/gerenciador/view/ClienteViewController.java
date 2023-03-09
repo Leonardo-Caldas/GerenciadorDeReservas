@@ -35,7 +35,7 @@ public class ClienteViewController {
     */
     @GetMapping("/cliente-editar/{id}")
     public String clienteEditar(@PathVariable("id") Integer id, Model model) {
-        ClienteResponse cliente =clienteController.pesquisar(id);
+        ClienteResponse cliente = clienteController.pesquisar(id);
         model.addAttribute("cliente", cliente);
         return "cliente-editar";
     }

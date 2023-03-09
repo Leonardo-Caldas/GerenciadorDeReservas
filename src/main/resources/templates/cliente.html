@@ -157,6 +157,12 @@
         table.table td a:hover {
             color: #2196F3;
         }
+        table.table td a. {
+
+        }
+        table.table td a.create {
+            color: #19bd30
+        }
         table.table td a.edit {
             color: #FFC107;
         }
@@ -389,6 +395,7 @@
                             <td>[[${cliente.telefone}]]</td>
                             <td>[[${cliente.email}]]</td>
                             <td>
+                                <a th:href="@{/reserva-mostrar-criar/{id}(id=${cliente.id})}" class="create"><i class="material-icons" data-toggle="tooltip" title="Adicionar Reserva">&#xf1bb;</i></a>
                                 <a th:href="@{/cliente-editar/{id}(id=${cliente.id})}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
                                 <a th:href="@{/cliente-excluir/{id}(id=${cliente.id})}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Excluir">&#xE872;</i></a>
                             </td>

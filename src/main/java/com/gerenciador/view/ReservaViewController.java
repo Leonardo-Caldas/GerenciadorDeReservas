@@ -44,15 +44,20 @@ public class ReservaViewController {
         reservaController.deletarReserva(id);
         return "redirect:/reservas";
     }
+    @GetMapping("/reserva-mostar-criar")
+    public String criarReserva(Model model, ReservaResponse reservaResponse) {
+        model.addAttribute("reserva", reservaResponse);
+        return "reserva-criar";
+    }
 
-    @PostMapping("/reservas-add/{id-cliente}")
+    @PostMapping("/reserva-add/{id-cliente}")
     public String adicionarReserva(@PathVariable("id-cliente") Integer idCliente, @Valid ReservaResponse reserva, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "reserva-editar";
         }
         ReservaRequest reservaRequest = new ReservaRequest();
         BeanUtils.copyProperties(reserva, reservaRequest);
-        reservaController.cadastrarReserva(idCliente, reservaRequest);
+        reservaController.cadastrarReserva(reservaRequest);
         return "redirect:/reservas";
     }
     @PostMapping("/reserva-gravar/{id}")

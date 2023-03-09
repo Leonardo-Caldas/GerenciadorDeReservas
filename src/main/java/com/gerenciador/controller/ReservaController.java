@@ -23,7 +23,7 @@ public class ReservaController {
     private final ClienteService clienteService;
 
     @PostMapping
-    public Integer cadastrarReserva(@PathVariable Integer id, @RequestBody ReservaRequest reservaRequest){
+    public Integer cadastrarReserva(@RequestBody ReservaRequest reservaRequest){
         Reserva reserva = new Reserva();
         reserva.setNumeroDeAcompanhantes(reservaRequest.getNumeroDeAcompanhantes());
         reserva.setDataMarcada(reservaRequest.getDataMarcada());
