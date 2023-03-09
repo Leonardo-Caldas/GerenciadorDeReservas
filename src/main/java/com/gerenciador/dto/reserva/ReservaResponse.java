@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
+import java.time.LocalTime;
 @Data
 public class ReservaResponse {
 
@@ -19,7 +19,7 @@ public class ReservaResponse {
 
     @NotEmpty
     @DateTimeFormat(pattern = "hh:mm")
-    private String horaMarcada;
+    private LocalTime horaMarcada;
 
     private Integer idCliente;
 }

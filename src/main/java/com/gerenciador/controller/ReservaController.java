@@ -20,14 +20,12 @@ import java.util.stream.Collectors;
 public class ReservaController {
 
     private final ReservaService reservaService;
-    private final ClienteService clienteService;
 
     @PostMapping
     public Integer cadastrarReserva(@RequestBody ReservaRequest reservaRequest){
         Reserva reserva = new Reserva();
-        reserva.setNumeroDeAcompanhantes(reservaRequest.getNumeroDeAcompanhantes());
-        reserva.setDataMarcada(reservaRequest.getDataMarcada());
-        reserva.setIdCliente(reservaRequest.getIdCliente());
+        BeanUtils.copyProperties(reservaRequest, reserva);
+        reservaService.cadastra(reserva);
         return reserva.getId();
     }
     @GetMapping

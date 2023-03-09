@@ -326,7 +326,7 @@
             <a href="admin-index.html">Área restrita</a>
         </div>
         <div class="header-right">
-            <a href="/reserva">Cadastro de Clientes</a>
+            <a href="/cliente">Cadastro de Clientes</a>
             <a href="/reservas" class="active">Cadastro de Reservas</a>
         </div>
     </div>
@@ -369,9 +369,11 @@
                                 </span>
                             </th>
                             -->
-                            <th>Nome</th>
+                            <th>ID</th>
                             <th>Data</th>
+                            <th>Hora</th>
                             <th>Número de Acompanhantes</th>
+                            <th>ID Cliente</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -383,10 +385,11 @@
                                     <label for="checkbox1"></label>
                                 </span>
                             </td> -->
-                            <td>[[${reserva.nome}]]</td>
-                            <td>[[${reserva.numero-acopanhantes}]]</td>
-                            <td>[[${reserva.data}]]</td>
-                            <td>[[${reserva.hora}]]</td>
+                            <td>[[${reserva.id}]]</td>
+                            <td>[[${reserva.dataMarcada}]]</td>
+                            <td>[[${reserva.horaMarcada}]]</td>
+                            <td>[[${reserva.numeroDeAcompanhantes}]]</td>
+                            <td>[[${reserva.idCliente}]]</td>
                             <td>
                                 <a th:href="@{/reserva-editar/{id}(id=${reserva.id})}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
                                 <a th:href="@{/reserva-excluir/{id}(id=${reserva.id})}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Excluir">&#xE872;</i></a>
