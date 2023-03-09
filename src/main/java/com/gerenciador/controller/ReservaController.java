@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,7 @@ public class ReservaController {
     private final ReservaService reservaService;
 
     @PostMapping
-    public Integer cadastrarReserva(@RequestBody ReservaRequest reservaRequest){
+    public Integer cadastrarReserva(@Valid @RequestBody ReservaRequest reservaRequest){
         Reserva reserva = new Reserva();
         BeanUtils.copyProperties(reservaRequest, reserva);
         reservaService.cadastra(reserva);
@@ -45,7 +46,7 @@ public class ReservaController {
     }
 
     @PutMapping("{id}")
-    public ReservaResponse alterarReserva(@PathVariable Integer id,@RequestBody ReservaRequest reservaRequest){
+    public ReservaResponse alterarReserva(@Valid @PathVariable Integer id, @RequestBody ReservaRequest reservaRequest){
         Reserva reserva = reservaService.pesquisa(id);
         BeanUtils.copyProperties(reservaRequest, reserva);
         reserva = reservaService.atualizar(reserva);

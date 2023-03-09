@@ -27,17 +27,11 @@ public class ReservaViewController {
         model.addAttribute("reservas", reservaController.listarTodos());
         return "reservas";
     }
-    @GetMapping("/reserva-editar/{id}")
-    public String reservaEditar(@PathVariable("id") Integer id, Model model) {
-        ReservaResponse reservaResponse = reservaController.pesquisarReserva(id);
-        model.addAttribute("reserva", reservaResponse);
-        return "reserva-editar";
-    }
-    @GetMapping("reservas-excluir/{id}")
+    @GetMapping("reserva-excluir/{id}")
     public String reservaExcluir(@PathVariable("id") Integer id, Model model) {
         ReservaResponse reservaResponse = reservaController.pesquisarReserva(id);
         model.addAttribute("reserva", reservaResponse);
-        return "reserva-exlcuir";
+        return "reserva-excluir";
     }
     @PostMapping("/excluir-reserva/{id}")
     public String excluirReserva(@PathVariable("id") Integer id) {
@@ -60,16 +54,16 @@ public class ReservaViewController {
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("mensagem", e.getMessage());
         }
-        /*if (result.hasErrors()) {
-            return "reserva-editar";
-        }
-
-         */
-
         return "redirect:/reservas";
     }
-    @PostMapping("/reserva-gravar/{id}")
-    public String atualizarReserva(@PathVariable("id") Integer id, Reserva reserva,
+    @GetMapping("/reserva-editar/{id}")
+    public String reservaEditar(@PathVariable("id") Integer id, Model model) {
+        ReservaResponse reservaResponse = reservaController.pesquisarReserva(id);
+        model.addAttribute("reserva", reservaResponse);
+        return "reserva-editar";
+    }
+    @PostMapping("/reserva-gravar/{id}/{idCliente}")
+    public String atualizarReserva(@PathVariable("id") Integer id, @PathVariable("idCliente") Integer idCliente, Reserva reserva,
                                    BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             reserva.setId(id);
@@ -78,6 +72,7 @@ public class ReservaViewController {
         ReservaRequest reservaRequest = new ReservaRequest();
         BeanUtils.copyProperties(reserva, reservaRequest);
         reservaController.alterarReserva(reserva.getId(), reservaRequest);
+        reservaRequest.setIdCliente(idCliente);
         return "redirect:/reservas";
     }
 
