@@ -3,12 +3,8 @@ package com.gerenciador.dto.cliente;
 import lombok.Data;
 
 @Data
-public class ClienteRequest {
-
-    private String nome;
-
-    private String telefone;
-
+public class ClientRequest {
+    private String name;
+    private String contactNumber;
     private String email;
-
 }

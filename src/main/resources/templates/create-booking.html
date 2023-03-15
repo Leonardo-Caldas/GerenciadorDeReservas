@@ -268,7 +268,7 @@
 <div id="editEmployeeModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form th:action="@{/reserva-add/{id}(id=${cliente})}" th:object="${reserva}" method="POST">
+      <form th:action="@{/booking-add/{id}(id=${client})}" th:object="${booking}" method="POST">
         <div class="modal-header">
           <h4 class="modal-title">Criar Reserva</h4>
           <a th:href="@{/reservas}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
@@ -276,7 +276,7 @@
         <div class="modal-body">
           <div class="form-group">
             <label>ID Cliente</label>
-            <output type="number" class="form-control" th:text="${cliente}" th:field="*{idCliente}"></output>
+            <span type="number" class="form-control" th:text="${client}"></span>
           </div>
           <div class="form-group">
             <label>Número de Acompanhantes</label>

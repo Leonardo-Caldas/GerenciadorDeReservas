@@ -3,10 +3,11 @@ package com.gerenciador.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Generated;
+import org.hibernate.id.UUIDGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -17,10 +18,9 @@ public class Reserva {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String uuid;
     private Integer numeroDeAcompanhantes;
-    private String dataMarcada;
+    private LocalDate dataMarcada;
     private LocalTime horaMarcada;
     private Integer idCliente;
 

@@ -268,21 +268,21 @@
 <div id="deleteEmployeeModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form th:action="@{/excluir/{id}(id=${cliente.id})}" th:object="${cliente}" th:method="PUT">
+            <form th:action="@{/excluir/{id}(id=${client.id})}" th:object="${client}" th:method="PUT">
                 <div class="modal-header">
                     <h4 class="modal-title">Excluir Cliente</h4>
-                    <a th:href="@{/cliente}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                    <a th:href="@{/client}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
                 </div>
                 <div class="modal-body">
-                    <p>Você tem certeza que gostaria de excluir este cliente?</p>
+                    <p>Você tem certeza que gostaria de excluir este client?</p>
                     <p>
-                        ID: <span th:text="${cliente.id}"></span> <br>
-                        Nome: <span th:text="${cliente.nome}"></span>
+                        ID: <span th:text="${client.id}"></span> <br>
+                        Nome: <span th:text="${client.nome}"></span>
                     </p>
                     <p class="text-warning"><small>Essa ação não poderá ser desfeita.</small></p>
                 </div>
                 <div class="modal-footer">
-                    <a th:href="@{/cliente}"><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar"></a>
+                    <a th:href="@{/client}"><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar"></a>
                     <input type="submit" class="btn btn-danger" value="Excluir">
                 </div>
             </form>

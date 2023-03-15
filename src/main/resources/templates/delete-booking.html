@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Cadastro de Cliente - Editar</title>
+    <title>Cadastro de Reserva - Excluir</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -264,32 +264,26 @@
     </script>
 </head>
 <body>
-<!-- Edit Modal HTML -->
-<div id="editEmployeeModal">
+<!-- Delete Modal HTML -->
+<div id="deleteEmployeeModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form th:action="@{/cliente-gravar/{id}(id=${cliente.id})}" th:object="${cliente}" method="POST">
+            <form th:action="@{/excluir-booking/{id}(id=${booking.id})}" th:object="${booking}" th:method="PUT">
                 <div class="modal-header">
-                    <h4 class="modal-title">Atualizar Cliente</h4>
-                    <a th:href="@{/cliente}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                    <h4 class="modal-title">Excluir Reserva</h4>
+                    <a th:href="@{/reservas}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Nome</label>
-                        <input type="text" class="form-control" th:field="*{nome}"  required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" th:field="*{email}"  required>
-                    </div>
-                    <div class="form-group">
-                        <label>Telefone</label>
-                        <input type="number" class="form-control" th:field="*{telefone}" required>
-                    </div>
+                    <p>Você tem certeza que gostaria de excluir esta reseva?</p>
+                    <p>
+                        ID: <span th:text="${booking.id}"></span> <br>
+                        Nome: <span th:text="${booking.idCliente}"></span>
+                    </p>
+                    <p class="text-warning"><small>Essa ação não poderá ser desfeita.</small></p>
                 </div>
                 <div class="modal-footer">
-                    <a th:href="@{/cliente}"><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar"></a>
-                    <input type="submit" class="btn btn-info" value="Salvar">
+                    <a th:href="@{/reservas}"><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar"></a>
+                    <input type="submit" class="btn btn-danger" value="Excluir">
                 </div>
             </form>
         </div>

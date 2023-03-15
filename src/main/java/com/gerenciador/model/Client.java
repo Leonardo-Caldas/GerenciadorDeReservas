@@ -3,6 +3,7 @@ package com.gerenciador.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.id.UUIDGenerator;
 
 import javax.persistence.*;
 
@@ -14,8 +15,7 @@ public class Cliente {
 
     // primary key
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String uuid;
 
     private String nome;
 

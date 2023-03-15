@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
 import java.time.LocalTime;
+import java.time.LocalDate;
 @Data
 public class ReservaResponse {
 
@@ -14,12 +15,12 @@ public class ReservaResponse {
     @Size(min=1, max=8, message="O número máximo de ocupantes por mesa é 8!")
     private Integer numeroDeAcompanhantes;
     @NotEmpty
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    // @DateTimeFormat(pattern = "dd/MM/yyyy")
     @FutureOrPresent
-    private String dataMarcada;
+    private LocalDate dataMarcada;
 
     @NotEmpty
-    @DateTimeFormat(pattern = "hh:mm")
+    //@DateTimeFormat(pattern = "hh:mm")
     @Future
     private LocalTime horaMarcada;
 
