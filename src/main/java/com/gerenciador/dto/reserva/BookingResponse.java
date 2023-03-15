@@ -1,29 +1,23 @@
 package com.gerenciador.dto.reserva;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.LocalDate;
 @Data
-public class ReservaResponse {
+public class BookingResponse {
 
-    private Integer id;
+    private String uuid;
 
     @NotNull
     @Size(min=1, max=8, message="O número máximo de ocupantes por mesa é 8!")
-    private Integer numeroDeAcompanhantes;
-    @NotEmpty
-    // @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Integer numberOfAttendees;
+    @NotNull
     @FutureOrPresent
-    private LocalDate dataMarcada;
-
-    @NotEmpty
-    //@DateTimeFormat(pattern = "hh:mm")
-    @Future
-    private LocalTime horaMarcada;
+    private LocalDateTime appointmentTimeStamp;
 
     @NotNull
-    private Integer idCliente;
+    private String clientUUID;
 }

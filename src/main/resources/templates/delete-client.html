@@ -271,7 +271,7 @@
             <form th:action="@{/excluir/{id}(id=${client.id})}" th:object="${client}" th:method="PUT">
                 <div class="modal-header">
                     <h4 class="modal-title">Excluir Cliente</h4>
-                    <a th:href="@{/client}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                    <a th:href="@{/templates/client-main.html}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
                 </div>
                 <div class="modal-body">
                     <p>Você tem certeza que gostaria de excluir este client?</p>
@@ -282,7 +282,7 @@
                     <p class="text-warning"><small>Essa ação não poderá ser desfeita.</small></p>
                 </div>
                 <div class="modal-footer">
-                    <a th:href="@{/client}"><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar"></a>
+                    <a th:href="@{/templates/client-main.html}"><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar"></a>
                     <input type="submit" class="btn btn-danger" value="Excluir">
                 </div>
             </form>

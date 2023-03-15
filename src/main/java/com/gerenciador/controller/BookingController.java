@@ -1,63 +1,58 @@
 package com.gerenciador.controller;
 
-import com.gerenciador.dto.reserva.ReservaRequest;
-import com.gerenciador.dto.reserva.ReservaResponse;
+import com.gerenciador.dto.reserva.BookingRequest;
+import com.gerenciador.dto.reserva.BookingResponse;
 import com.gerenciador.model.Booking;
-import com.gerenciador.service.ReservaService;
+import com.gerenciador.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api-reserva")
+@RequestMapping("booking-api")
 @RequiredArgsConstructor
-public class ReservaController {
+public class BookingController {
 
-    private final ReservaService reservaService;
+    private final BookingService bookingService;
 
     @PostMapping
-    public Integer cadastrarReserva(@Valid @RequestBody ReservaRequest reservaRequest){
+    public String create(@Valid @RequestBody BookingRequest bookingRequest){
         Booking booking = new Booking();
         //BeanUtils.copyProperties(reservaRequest, reserva);
-        booking.setDataMarcada(LocalDate.parse(reservaRequest.getDataMarcada()));
-        booking.setHoraMarcada(LocalTime.parse(reservaRequest.getHoraMarcada()));
-        reservaService.createBooking(booking);
-        return booking.getId();
+        booking.setAppointmentTimeStamp(LocalDateTime.parse(bookingRequest.getAppointmentTimeStamp()));
+        bookingService.create(booking);
+        return booking.getUuid();
     }
     @GetMapping
-    public ReservaResponse pesquisarReserva(@PathVariable Integer id){
-        Booking booking = reservaService.pesquisa(id);
-        ReservaResponse reservaResponse = new ReservaResponse();
-        BeanUtils.copyProperties(booking, reservaResponse);
-        return reservaResponse;
+    public BookingResponse findByUUID(@PathVariable String uuid){
+        Booking booking = bookingService.findByUUID(uuid);
+        BookingResponse bookingResponse = new BookingResponse();
+        BeanUtils.copyProperties(booking, bookingResponse);
+        return bookingResponse;
     }
     @GetMapping("{id}")
-    public List<ReservaResponse> listarTodos(){
-        return reservaService.listarReservas().stream().map(booking -> {
-            ReservaResponse reservaResponse = new ReservaResponse();
-            BeanUtils.copyProperties(booking, reservaResponse);
-            return reservaResponse;
+    public List<BookingResponse> listAllBookings(){
+        return bookingService.listAll().stream().map(booking -> {
+            BookingResponse bookingResponse = new BookingResponse();
+            BeanUtils.copyProperties(booking, bookingResponse);
+            return bookingResponse;
         }).collect(Collectors.toList());
     }
-
     @PutMapping("{id}")
-    public ReservaResponse alterarReserva(@Valid @PathVariable Integer id, @RequestBody ReservaRequest reservaRequest){
-        Booking booking = reservaService.pesquisa(id);
-        BeanUtils.copyProperties(reservaRequest, booking);
-        booking = reservaService.atualizar(booking);
-        ReservaResponse reservaResponse = new ReservaResponse();
-        BeanUtils.copyProperties(booking, reservaResponse);
-        return reservaResponse;
+    public BookingResponse updateByUUID(@Valid @PathVariable String uuid, @RequestBody BookingRequest bookingRequest){
+        Booking booking = bookingService.findByUUID(uuid);
+        BeanUtils.copyProperties(bookingRequest, booking);
+        booking = bookingService.updateByUUID(booking);
+        BookingResponse bookingResponse = new BookingResponse();
+        BeanUtils.copyProperties(booking, bookingResponse);
+        return bookingResponse;
     }
-
     @DeleteMapping("{id}")
-    public void deletarReserva(@PathVariable Integer id){
-        Booking booking = reservaService.excluir(id);
+    public void deleteByUUID(@PathVariable String uuid){
+        Booking booking = bookingService.deleteByUUID(uuid);
     }
 }

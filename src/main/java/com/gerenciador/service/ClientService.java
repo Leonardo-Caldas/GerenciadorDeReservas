@@ -1,41 +1,47 @@
 package com.gerenciador.service;
 
-import com.gerenciador.model.Cliente;
-import com.gerenciador.repository.ClienteRepository;
+import com.gerenciador.model.Client;
+import com.gerenciador.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class ClienteService {
+public class ClientService {
 
-    private final ClienteRepository clienteRepository;
+    private final ClientRepository clientRepository;
 
-    public Cliente cadastrar(Cliente cliente){
-        return clienteRepository.save(cliente);
+    public Client singUp(Client client){
+        client.setUuid(UUID.randomUUID().toString());
+        return clientRepository.save(client);
     }
 
-    public List<Cliente> listar(){
-        List<Cliente> lista = new ArrayList<>();
-        clienteRepository.findAll().forEach(lista::add);
-        return lista;
+    public List<Client> listAll(){
+        List<Client> listOfClients = new ArrayList<>();
+        clientRepository.findAll().forEach(listOfClients::add);
+        return listOfClients;
     }
 
-    public Cliente pesquisar(Integer id) {
-        return clienteRepository.findById(id).orElse(null);
+    @NotNull
+    public Client findByUUID(String uuid) {
+        return clientRepository.findById(uuid).orElse(null);
     }
 
-    public Cliente atualizar(Cliente cliente){
-        return clienteRepository.save(cliente);
+    @NotNull
+    public Client update(Client client){
+        return clientRepository.save(client);
     }
 
-    public Cliente excluir(int id){
-        Cliente cliente = clienteRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        clienteRepository.deleteById(id);
-        return cliente;
+    @NotNull
+    public Client deleteByUUID(String uuid){
+        Client client = clientRepository.findById(uuid).orElseThrow(IllegalArgumentException::new);
+        clientRepository.deleteById(uuid);
+        return client;
     }
 
 

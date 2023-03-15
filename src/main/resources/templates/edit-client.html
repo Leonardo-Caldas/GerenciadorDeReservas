@@ -268,15 +268,15 @@
 <div id="editEmployeeModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form th:action="@{/client-gravar/{id}(id=${client.id})}" th:object="${client}" method="POST">
+            <form th:action="@{/client/{id}(id=${client.id})}" th:object="${client}" method="POST">
                 <div class="modal-header">
                     <h4 class="modal-title">Atualizar Cliente</h4>
-                    <a th:href="@{/client}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
+                    <a th:href="@{/templates/client-main.html}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Nome</label>
-                        <input type="text" class="form-control" th:field="*{nome}"  required>
+                        <input type="text" class="form-control" th:field="*{name}"  required>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
@@ -284,11 +284,11 @@
                     </div>
                     <div class="form-group">
                         <label>Telefone</label>
-                        <input type="number" class="form-control" th:field="*{telefone}" required>
+                        <input type="number" class="form-control" th:field="*{contactNumber}" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a th:href="@{/client}"><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar"></a>
+                    <a th:href="@{/templates/client-main.html}"><input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar"></a>
                     <input type="submit" class="btn btn-info" value="Salvar">
                 </div>
             </form>

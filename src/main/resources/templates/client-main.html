@@ -332,8 +332,8 @@
             <a href="admin-index.html">Área restrita</a>
         </div>
         <div class="header-right">
-            <a href="/client" class="active">Cadastro de Clientes</a>
-            <a href="/reservas">Cadastro de Reservas</a>
+            <a href="/client/main" class="active">Cadastro de Clientes</a>
+            <a href="/booking/main">Cadastro de Reservas</a>
         </div>
     </div>
 </header>
@@ -361,7 +361,7 @@
                 </button>
             </div>
 
-            <div th:switch="${#lists.size(clientes)}">
+            <div th:switch="${#lists.size(clients)}">
                 <h2 th:case="0">Não existem clientes cadastrados!</h2>
                 <div th:case="*">
                     <table class="table table-striped table-hover">
@@ -382,7 +382,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="client : ${clientes}">
+                        <tr th:each="client : ${clients}">
                             <!--
                             <td>
                                 <span class="custom-checkbox">
@@ -390,14 +390,14 @@
                                     <label for="checkbox1"></label>
                                 </span>
                             </td> -->
-                            <td>[[${client.id}]]</td>
-                            <td>[[${client.nome}]]</td>
-                            <td>[[${client.telefone}]]</td>
+                            <td>[[${client.uuid}]]</td>
+                            <td>[[${client.name}]]</td>
+                            <td>[[${client.contactNumber}]]</td>
                             <td>[[${client.email}]]</td>
                             <td>
-                                <a th:href="@{/booking-mostrar-criar/{id}(id=${client.id})}" class="create"><i class="material-icons" data-toggle="tooltip" title="Adicionar Reserva">&#xf1bb;</i></a>
-                                <a th:href="@{/client-editar/{id}(id=${client.id})}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                                <a th:href="@{/client-excluir/{id}(id=${client.id})}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Excluir">&#xE872;</i></a>
+                                <a th:href="@{/booking/create/{id}(id=${client.getUuid()})}" class="create"><i class="material-icons" data-toggle="tooltip" title="Adicionar Reserva">&#xf1bb;</i></a>
+                                <a th:href="@{/client-editar/{id}(id=${client.getUuid()})}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+                                <a th:href="@{/client-excluir/{id}(id=${client.getUuid()})}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Excluir">&#xE872;</i></a>
                             </td>
                         </tr>
                         </tbody>

@@ -326,8 +326,8 @@
             <a href="admin-index.html">Área restrita</a>
         </div>
         <div class="header-right">
-            <a href="/client">Cadastro de Clientes</a>
-            <a href="/reservas" class="active">Cadastro de Reservas</a>
+            <a href="/client/main">Cadastro de Clientes</a>
+            <a href="/booking/main" class="active">Cadastro de Reservas</a>
         </div>
     </div>
 </header>
@@ -355,7 +355,7 @@
                 </button>
             </div>
 
-            <div th:switch="${#lists.size(reservas)}">
+            <div th:switch="${#lists.size(bookings)}">
                 <h2 th:case="0">Não existem reservas cadastradas!</h2>
                 <div th:case="*">
                     <table class="table table-striped table-hover">
@@ -371,13 +371,12 @@
                             -->
                             <th>ID</th>
                             <th>Data</th>
-                            <th>Hora</th>
                             <th>Número de Acompanhantes</th>
                             <th>ID Cliente</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="booking : ${reservas}">
+                        <tr th:each="booking : ${bookings}">
                             <!--
                             <td>
                                 <span class="custom-checkbox">
@@ -385,11 +384,10 @@
                                     <label for="checkbox1"></label>
                                 </span>
                             </td> -->
-                            <td>[[${booking.id}]]</td>
-                            <td>[[${booking.dataMarcada}]]</td>
-                            <td>[[${booking.horaMarcada}]]</td>
-                            <td>[[${booking.numeroDeAcompanhantes}]]</td>
-                            <td>[[${booking.idCliente}]]</td>
+                            <td>[[${booking.uuid}]]</td>
+                            <td>[[${booking.appointmentTimeStamp}]]</td>
+                            <td>[[${booking.numberOfAttendees}]]</td>
+                            <td>[[${booking.uuidClient}]]</td>
                             <td>
                                 <a th:href="@{/booking-editar/{id}(id=${booking.id})}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
                                 <a th:href="@{/booking-excluir/{id}(id=${booking.id})}" class="delete"><i class="material-icons" data-toggle="tooltip" title="Excluir">&#xE872;</i></a>

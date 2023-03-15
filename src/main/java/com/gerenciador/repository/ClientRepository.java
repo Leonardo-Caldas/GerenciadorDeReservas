@@ -1,8 +1,8 @@
 package com.gerenciador.repository;
 
-import com.gerenciador.model.Cliente;
+import com.gerenciador.model.Client;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ClienteRepository extends CrudRepository<Cliente, Integer>{
+public interface ClientRepository extends CrudRepository<Client, String>{
 
 }

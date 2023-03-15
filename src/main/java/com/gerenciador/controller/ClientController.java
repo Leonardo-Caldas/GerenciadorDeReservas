@@ -1,9 +1,9 @@
 package com.gerenciador.controller;
 
-import com.gerenciador.dto.cliente.ClienteRequest;
-import com.gerenciador.dto.cliente.ClienteResponse;
-import com.gerenciador.model.Cliente;
-import com.gerenciador.service.ClienteService;
+import com.gerenciador.dto.client.ClientRequest;
+import com.gerenciador.dto.client.ClientResponse;
+import com.gerenciador.model.Client;
+import com.gerenciador.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -12,48 +12,48 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api-cliente")
+@RequestMapping("client-api")
 @RequiredArgsConstructor
-public class ClienteController {
-    private final ClienteService clienteService;
+public class ClientController {
+    private final ClientService clientService;
     @PostMapping
-    public Integer cadastrar(@RequestBody ClienteRequest request) {
-        Cliente cliente = new Cliente();
-        BeanUtils.copyProperties(request, cliente);
-        clienteService.cadastrar(cliente);
-        return cliente.getId();
+    public String singUp(@RequestBody ClientRequest request) {
+        Client client = new Client();
+        BeanUtils.copyProperties(request, client);
+        clientService.singUp(client);
+        return client.getUuid();
     }
 
     @GetMapping
-    public List<ClienteResponse> listar() {
-        return clienteService.listar().stream().map(cliente -> {
-            ClienteResponse clienteResponse = new ClienteResponse();
-            BeanUtils.copyProperties(cliente, clienteResponse);
-            return clienteResponse;
+    public List<ClientResponse> listAll() {
+        return clientService.listAll().stream().map(client -> {
+            ClientResponse clientResponse = new ClientResponse();
+            BeanUtils.copyProperties(client, clientResponse);
+            return clientResponse;
         }).collect(Collectors.toList());
     }
 
     @GetMapping("{id}")
-    public ClienteResponse pesquisar(@PathVariable Integer id) {
-        Cliente cliente = clienteService.pesquisar(id);
-        ClienteResponse response = new ClienteResponse();
-        BeanUtils.copyProperties(cliente, response);
+    public ClientResponse findByUUID(@PathVariable String uuid) {
+        Client client = clientService.findByUUID(uuid);
+        ClientResponse response = new ClientResponse();
+        BeanUtils.copyProperties(client, response);
         return response;
     }
 
     @PutMapping("{id}")
-    public ClienteResponse atualizar(@PathVariable Integer id, @RequestBody ClienteRequest clienteRequest) {
-        Cliente cliente = clienteService.pesquisar(id);
-        BeanUtils.copyProperties(clienteRequest, cliente);
-        cliente = clienteService.atualizar(cliente);
-        ClienteResponse response = new ClienteResponse();
-        BeanUtils.copyProperties(cliente, response);
+    public ClientResponse updateByUUID(@PathVariable String uuid, @RequestBody ClientRequest clientRequest) {
+        Client client = clientService.findByUUID(uuid);
+        BeanUtils.copyProperties(clientRequest, client);
+        client = clientService.update(client);
+        ClientResponse response = new ClientResponse();
+        BeanUtils.copyProperties(client, response);
         return response;
     }
 
     @DeleteMapping("{id}")
-    public void excluir(@PathVariable Integer id) {
-        clienteService.excluir(id);
+    public void deleteByUUID(@PathVariable String uuid) {
+        clientService.deleteByUUID(uuid);
     }
 }
 

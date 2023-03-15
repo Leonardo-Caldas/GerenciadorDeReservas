@@ -1,8 +1,8 @@
 package com.gerenciador.view;
 
 import com.gerenciador.controller.ClientController;
-import com.gerenciador.dto.cliente.ClientRequest;
-import com.gerenciador.dto.cliente.ClientResponse;
+import com.gerenciador.dto.client.ClientRequest;
+import com.gerenciador.dto.client.ClientResponse;
 import com.gerenciador.model.Client;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -15,85 +15,69 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Controller
 @RequiredArgsConstructor
-public class ClienteViewController {
+@RequestMapping("/client")
+public class ClientViewController {
     private final ClientController clientController;
 
-    @RequestMapping(value = {"/cliente"})
+    @RequestMapping(value = {"/main"})
     public String index(Model model) {
-        model.addAttribute("clientes", clientController.listar());
-        return "cliente";
+        model.addAttribute("clients", clientController.listAll());
+        return "client-main";
     }
-    @GetMapping("/cliente-editar/{id}")
-    public String clienteEditar(@PathVariable("id") Integer id, Model model) {
-        ClientResponse cliente = clientController.pesquisar(id);
-        model.addAttribute("cliente", cliente);
-        return "cliente-editar";
+    @GetMapping("/client-edit/{id}")
+    public String updateClientbyUUID(@PathVariable("id") String uuid, Model model) {
+        ClientResponse client = clientController.findByUUID(uuid);
+        model.addAttribute("client", client);
+        return "client-main";
     }
 
-    @GetMapping("/cliente-excluir/{id}")
-    public String clienteExcluir(@PathVariable("id") Integer id, Model model) {
-        ClientResponse cliente = clientController.pesquisar(id);
-        model.addAttribute("cliente", cliente);
-        return "cliente-excluir";
+    @GetMapping("/client-excluir/{id}")
+    public String deleteClientByUUID(@PathVariable("id") String uuid, Model model) {
+        ClientResponse client = clientController.findByUUID(uuid);
+        model.addAttribute("client", client);
+        return "client-excluir";
     }
 
     @PostMapping("/excluir/{id}")
-    public String excluirCliente(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+    public String deleteClientByUUID(@PathVariable("id") String uuid, RedirectAttributes redirectAttributes) {
         try {
-            clientController.excluir(id);
-            redirectAttributes.addFlashAttribute("mensagem", String.format("Cliente ID - %s excluído com sucesso!", id));
+            clientController.deleteByUUID(uuid);
+            redirectAttributes.addFlashAttribute("mensagem", String.format("client ID - %s excluído com sucesso!", uuid));
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("mensagem", e.getMessage());
         }
 
-        return "redirect:/cliente";
+        return "redirect:/client";
     }
 
-    @PostMapping("/cliente-add")
-    public String addCliente(ClientRequest cliente, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    @PostMapping("/client-add")
+    public String addclient(ClientRequest client, BindingResult result,
+                             Model model, RedirectAttributes redirectAttributes) {
 
         try{
-            clientController.cadastrar(cliente);
-            redirectAttributes.addFlashAttribute("mensagem", String.format("Cliente %s cadastrado com sucesso!", cliente.getNome()));
+            clientController.singUp(client);
+            redirectAttributes.addFlashAttribute("mensagem", String.format("client %s cadastrado com sucesso!", client.getName()));
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("mensagem", e.getMessage());
         }
 
-        return "redirect:/cliente";
+        return "redirect:/client";
     }
 
-    @PostMapping("/cliente-gravar/{id}")
-    public String atualizarCliente(@PathVariable("id") Integer id, Client client,
-                                   BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-
+    @PostMapping("/client-gravar/{id}")
+    public String updateClientByUUID(@PathVariable("id") Integer id, Client client,
+                                     BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         try{
-            /*
-        if (result.hasErrors()) {
-            cliente.setId(id);
-            return "comodo-update";
-        }
-
-         */
             ClientRequest clientRequest = new ClientRequest();
-            /*
-            clienteRequest.setNome(cliente.getNome());
-            clienteRequest.setTelefone(cliente.getTelefone());
-            clienteRequest.setEmail(cliente.getEmail());
-
-             */
             BeanUtils.copyProperties(client, clientRequest);
-
-            clientController.atualizar(client.getId(), clientRequest);
-
-            redirectAttributes.addFlashAttribute("mensagem", String.format("Cliente %s atualizado com sucesso!", client.getName()));
+            clientController.updateByUUID(client.getUuid(), clientRequest);
+            redirectAttributes.addFlashAttribute("mensagem", String.format("client %s atualizado com sucesso!", client.getName()));
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("mensagem", e.getMessage());
         }
-
-        return "redirect:/cliente";
+        return "redirect:/client";
     }
 
 }

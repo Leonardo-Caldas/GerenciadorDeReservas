@@ -2,42 +2,44 @@ package com.gerenciador.service;
 
 
 import com.gerenciador.model.Booking;
-import com.gerenciador.repository.ReservaRepository;
+import com.gerenciador.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class ReservaService {
+public class BookingService {
 
-    private final ReservaRepository reservaRepository;
+    private final BookingRepository bookingRepository;
 
-    public Booking createBooking(Booking booking){
+    public Booking create(Booking booking){
         booking.setUuid(UUID.randomUUID().toString());
-        return  reservaRepository.save(booking);
+        return  bookingRepository.save(booking);
     }
 
-    public List<Booking>listarReservas(){
-        List<Booking> listaBooking =  new ArrayList<>();
-        reservaRepository.findAll().forEach(listaBooking::add);
-        return listaBooking;
+    public List<Booking> listAll(){
+        List<Booking> bookings =  new ArrayList<>();
+        bookingRepository.findAll().forEach(bookings::add);
+        return bookings;
     }
 
-    public Booking pesquisa(Integer id){
-        return reservaRepository.findById(id).orElse(null);
+    @NotNull
+    public Booking findByUUID(String uuid){
+        return bookingRepository.findById(uuid).orElse(null);
+    }
+    @NotNull
+    public Booking updateByUUID(Booking booking){
+        return bookingRepository.save(booking);
     }
 
-    public Booking atualizar(Booking booking){
-        return reservaRepository.save(booking);
-    }
-
-    public Booking excluir(Integer id){
-       Booking booking = reservaRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        reservaRepository.deleteById(id);
+    public Booking deleteByUUID(String id){
+       Booking booking = bookingRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        bookingRepository.deleteById(id);
         return booking;
     }
 }

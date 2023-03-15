@@ -1,4 +1,4 @@
-package com.gerenciador.dto.cliente;
+package com.gerenciador.dto.client;
 
 import lombok.Data;
 

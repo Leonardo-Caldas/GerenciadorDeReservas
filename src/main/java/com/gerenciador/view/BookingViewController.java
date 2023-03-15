@@ -18,61 +18,61 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
-public class ReservaViewController {
+@RequestMapping("/booking")
+public class BookingViewController {
     private final BookingController bookingController;
     private final ClientController clientController;
 
-    @RequestMapping(value = {"/reservas"})
+    @RequestMapping(value = {"/main"})
     public String mostarReservas(Model model) {
-        model.addAttribute("reservas", bookingController.listAllBookings());
-        return "reservas";
+        model.addAttribute("bookings", bookingController.listAllBookings());
+        return "booking-main";
     }
     @GetMapping("reserva-excluir/{id}")
-    public String reservaExcluir(@PathVariable("id") Integer id, Model model) {
-        BookingResponse bookingResponse = bookingController.pesquisarReserva(id);
+    public String reservaExcluir(@PathVariable("id") String uuid, Model model) {
+        BookingResponse bookingResponse = bookingController.findByUUID(uuid);
         model.addAttribute("reserva", bookingResponse);
-        return "reserva-excluir";
+        return "delete-booking";
     }
     @PostMapping("/excluir-reserva/{id}")
-    public String excluirReserva(@PathVariable("id") Integer id) {
-        bookingController.deletarReserva(id);
+    public String excluirReserva(@PathVariable("id") String uuid) {
+        bookingController.deleteByUUID(uuid);
         return "redirect:/reservas";
     }
-    @GetMapping("/reserva-mostrar-criar/{idCliente}")
-    public String criarReserva(@PathVariable("idCliente") Integer idCliente, Model model, BookingResponse bookingResponse) {
-        model.addAttribute("cliente", idCliente);
-        model.addAttribute("reserva", bookingResponse);
-        return "reserva-criar";
+    @GetMapping("/create/{idCliente}")
+    public String criarReserva(@PathVariable("idCliente") String clientUUID, Model model, BookingResponse bookingResponse) {
+        model.addAttribute("client", clientUUID);
+        model.addAttribute("booking", bookingResponse);
+        return "create-booking";
     }
-
     @PostMapping("/reserva-add/{id}")
-    public String adicionarReserva(@PathVariable ("id") Integer idCliente, BookingRequest reserva, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    public String adicionarReserva(@PathVariable ("id") String clientUUID, BookingRequest bookingRequest, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         try{
-            reserva.setIdCliente(idCliente);
-            bookingController.cadastrarReserva(reserva);
-            redirectAttributes.addFlashAttribute("mensagem", String.format("Reserva marcada para o dia %s com sucesso!", reserva.getDataMarcada()));
+            bookingRequest.setClientUUID(clientUUID);
+            bookingController.create(bookingRequest);
+            redirectAttributes.addFlashAttribute("mensagem", String.format("Reserva marcada para a data %s com sucesso!", bookingRequest.getAppointmentTimeStamp()));
         } catch (Exception e){
             redirectAttributes.addFlashAttribute("mensagem", e.getMessage());
         }
         return "redirect:/reservas";
     }
     @GetMapping("/reserva-editar/{id}")
-    public String reservaEditar(@PathVariable("id") Integer id, Model model) {
-        BookingResponse bookingResponse = bookingController.pesquisarReserva(id);
-        model.addAttribute("cliente", clientController.pesquisar(bookingResponse.getIdCliente()));
+    public String reservaEditar(@PathVariable("id") String uuid, Model model) {
+        BookingResponse bookingResponse = bookingController.findByUUID(uuid);
+        model.addAttribute("cliente", clientController.findByUUID(bookingResponse.getClientUUID()));
         model.addAttribute("reserva", bookingResponse);
-        return "reserva-editar";
+        return "edit-booking";
     }
     @PostMapping("/reserva-gravar/{id}")
-    public String atualizarReserva(@PathVariable("id") Integer id, Booking booking,
+    public String atualizarReserva(@PathVariable("id") String uuid, Booking booking,
                                    BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            booking.setId(id);
-            return "reserva-editar";
+            booking.setUuid(uuid);
+            return "edit-booking";
         }
         BookingRequest bookingRequest = new BookingRequest();
         BeanUtils.copyProperties(booking, bookingRequest);
-        bookingController.alterarReserva(booking.getId(), bookingRequest);
+        bookingController.updateByUUID(booking.getUuid(), bookingRequest);
         return "redirect:/reservas";
     }
 }

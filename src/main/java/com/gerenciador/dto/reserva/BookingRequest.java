@@ -4,9 +4,8 @@ import lombok.Data;
 
 
 @Data
-public class ReservaRequest {
-    private Integer numeroDeAcompanhantes;
-    private String dataMarcada;
-    private String horaMarcada;
-    private String uuidCliente;
+public class BookingRequest {
+    private Integer numberOfAttendees;
+    private String appointmentTimeStamp;
+    private String clientUUID;
 }
