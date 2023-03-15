@@ -5,9 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -21,7 +18,7 @@ public class Reserva {
     private Integer id;
     private Integer numeroDeAcompanhantes;
     private String dataMarcada;
-    private LocalTime horaMarcada;
+    private String horaMarcada;
     private Integer idCliente;
 
 

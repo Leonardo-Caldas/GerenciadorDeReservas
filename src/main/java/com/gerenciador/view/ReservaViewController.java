@@ -75,5 +75,4 @@ public class ReservaViewController {
         reservaRequest.setIdCliente(idCliente);
         return "redirect:/reservas";
     }
-
 }

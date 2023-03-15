@@ -8,6 +8,6 @@ import java.time.LocalTime;
 public class ReservaRequest {
     private Integer numeroDeAcompanhantes;
     private String dataMarcada;
-    private LocalTime horaMarcada;
+    private String horaMarcada;
     private Integer idCliente;
 }

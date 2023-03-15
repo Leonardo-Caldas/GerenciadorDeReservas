@@ -20,8 +20,8 @@ public class ReservaResponse {
 
     @NotEmpty
     @DateTimeFormat(pattern = "hh:mm")
-    @Future
-    private LocalTime horaMarcada;
+    @FutureOrPresent
+    private String horaMarcada;
 
     @NotNull
     private Integer idCliente;
