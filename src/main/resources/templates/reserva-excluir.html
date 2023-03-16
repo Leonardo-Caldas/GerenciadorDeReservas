@@ -268,7 +268,7 @@
 <div id="deleteEmployeeModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form th:action="@{/excluir-booking/{id}(id=${booking.id})}" th:object="${booking}" th:method="PUT">
+            <form th:action="@{/excluir-reserva/{id}(id=${reserva.id})}" th:object="${reserva}" th:method="PUT">
                 <div class="modal-header">
                     <h4 class="modal-title">Excluir Reserva</h4>
                     <a th:href="@{/reservas}"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></a>
@@ -276,8 +276,8 @@
                 <div class="modal-body">
                     <p>Você tem certeza que gostaria de excluir esta reseva?</p>
                     <p>
-                        ID: <span th:text="${booking.id}"></span> <br>
-                        Nome: <span th:text="${booking.idCliente}"></span>
+                        ID: <span th:text="${reserva.id}"></span> <br>
+                        Nome: <span th:text="${reserva.idCliente}"></span>
                     </p>
                     <p class="text-warning"><small>Essa ação não poderá ser desfeita.</small></p>
                 </div>
